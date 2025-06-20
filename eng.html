@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="animated-background-image-container">
+      <img src="img/png.png" alt="Animated Background" />
+    </div>
+
+    <div class="preloader" id="preloader">
+      <div class="preloader-airplane-track">
+        <img src="img/airplane1.png" alt="Летающий самолет" />
+      </div>
+      <div class="preloader-logo-text-container">
+        <img
+          src="img/logo.png"
+          alt="Логотип загрузки"
+          class="preloader-image"
+        />
+        <p class="preloader-text">Loading...</p>
+        <p class="preloader-hash" id="preloaderHashDisplay"></p>
+      </div>
+    </div>
+
+    <div
+      class="status-loader-overlay"
+      id="statusLoaderOverlay"
+      style="display: none"
+    >
+      <div class="status-loader-window">
+        <div class="status-loader-title" id="statusLoaderTitle">
+          DATA SYNCHRONIZATION
+        </div>
+        <div class="status-loader-logs" id="statusLoaderLogs"></div>
+        <div class="analysis-display" id="analysisDisplay"></div>
+        <div class="status-loader-message" id="statusLoaderMessage"></div>
+        <button
+          class="status-loader-close-button"
+          id="statusLoaderCloseButton"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <div class="game-content" id="mainGameContent" style="display: none">
+      <div class="ball-container" id="ballContainer" style="opacity: 0">
+        <img
+          src="img/airplane.png"
+          alt="Airplane Icon"
+          class="center-image"
+          id="ball"
+        />
+        <div class="bet-display" id="betDisplay" style="opacity: 0"></div>
+      </div>
+
+      <div
+        class="flight-analysis-section"
+        id="flightAnalysisSection"
+        style="display: none"
+      >
+        <div class="flight-analysis-text" id="flightAnalysisText">Analysis</div>
+        <div class="flight-progress-bar-container">
+          <div
+            class="flight-progress-bar-fill"
+            id="flightProgressBarFill"
+          ></div>
+        </div>
+      </div>
+
+      <button class="start-button" id="startButton">Start</button>
+      <!-- <a href="https://djonmon.github.io/NEW/MENU/main.html" class="start-button back-button" id="backButton">Back</a> -->
+    </div>
+
+    <div class="betting-panel" id="bettingPanel" style="display: none">
+      <h2 class="title">Enter the amount of the bet:</h2>
+      <input
+        type="text"
+        id="accountIdInput"
+        placeholder="Enter the amount"
+        class="bet-input"
+      />
+      <div class="error-message" id="idErrorMessage" style="display: none">
+        Enter the correct amount
+      </div>
+      <button class="confirm-button" id="confirmButton" disabled>
+        Confirm
+      </button>
+    </div>
+    <div
+      style="
+        position: absolute;
+        bottom: 50px;
+        left: calc(50% - 80px);
+        z-index: 99999999;
+      "
+    >
+      <p style="color: white; text-align: center">Select language:</p>
+      <div
+        style="
+          display: flex;
+          width: 160px;
+          margin: 0 auto;
+          justify-content: space-between;
+        "
+      >
+        <div>
+          <a href="index.html"
+            ><img style="border-radius: 15px" width="70px" src="ru.jpg"
+          /></a>
+        </div>
+        <div>
+          <a href="eng.html"
+            ><img style="border-radius: 15px" width="70px" src="us.jpg"
+          /></a>
+        </div>
+      </div>
+    </div>
+    <div class="site-session-hash" id="siteSessionHashDisplay"></div>
+
+    <script src="script4.js" type="module" defer></script>
+  </body>
+</html>
