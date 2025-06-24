@@ -74,11 +74,29 @@
       </div>
 
       <button class="start-button" id="startButton">Start</button>
+      <div class="language-dropdown-container">
+        <button class="language-dropdown-btn" id="languageDropdownBtn">
+          Language
+        </button>
+        <div class="language-dropdown-list" id="languageDropdownList">
+          <a href="index.html" class="language-dropdown-item">Russian</a>
+          <a href="eng.html" class="language-dropdown-item">English</a>
+        </div>
+      </div>
       <!-- <a href="https://djonmon.github.io/NEW/MENU/main.html" class="start-button back-button" id="backButton">Back</a> -->
     </div>
 
     <div class="betting-panel" id="bettingPanel" style="display: none">
       <h2 class="title">Enter the amount of the bet:</h2>
+      <div class="currency-select">
+        <label class="currency-option"
+          ><input type="radio" name="currency" value="USD" checked />
+          Dollars</label
+        >
+        <label class="currency-option"
+          ><input type="radio" name="currency" value="RUB" /> Rubles</label
+        >
+      </div>
       <input
         type="text"
         id="accountIdInput"
@@ -92,37 +110,7 @@
         Confirm
       </button>
     </div>
-    <div
-      style="
-        position: absolute;
-        bottom: 50px;
-        left: calc(50% - 80px);
-        z-index: 99999999;
-      "
-    >
-      <p style="color: white; text-align: center">Select language:</p>
-      <div
-        style="
-          display: flex;
-          width: 160px;
-          margin: 0 auto;
-          justify-content: space-between;
-        "
-      >
-        <div>
-          <a href="index.html"
-            ><img style="border-radius: 15px" width="70px" src="ru.jpg"
-          /></a>
-        </div>
-        <div>
-          <a href="eng.html"
-            ><img style="border-radius: 15px" width="70px" src="us.jpg"
-          /></a>
-        </div>
-      </div>
-    </div>
     <div class="site-session-hash" id="siteSessionHashDisplay"></div>
-
     <script src="script4.js" type="module" defer></script>
   </body>
 </html>

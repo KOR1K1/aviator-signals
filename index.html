@@ -74,11 +74,28 @@
       </div>
 
       <button class="start-button" id="startButton">Начать</button>
-      <!-- <a href="https://djonmon.github.io/NW/M/main.html" class="start-button back-button" id="backButton">Назад</a> -->
+      <div class="language-dropdown-container">
+        <button class="language-dropdown-btn" id="languageDropdownBtn">
+          Язык
+        </button>
+        <div class="language-dropdown-list" id="languageDropdownList">
+          <a href="index.html" class="language-dropdown-item">Русский</a>
+          <a href="eng.html" class="language-dropdown-item">English</a>
+        </div>
+      </div>
     </div>
 
     <div class="betting-panel" id="bettingPanel" style="display: none">
       <h2 class="title">Введите сумму ставки:</h2>
+      <div class="currency-select">
+        <label class="currency-option"
+          ><input type="radio" name="currency" value="RUB" checked />
+          Рубли</label
+        >
+        <label class="currency-option"
+          ><input type="radio" name="currency" value="USD" /> Доллары</label
+        >
+      </div>
       <input
         type="text"
         id="accountIdInput"
@@ -94,37 +111,6 @@
     </div>
 
     <div class="site-session-hash" id="siteSessionHashDisplay"></div>
-
     <script src="script3.js" type="module" defer></script>
-
-    <div
-      style="
-        position: absolute;
-        bottom: 50px;
-        left: calc(50% - 80px);
-        z-index: 99999999;
-      "
-    >
-      <p style="color: white; text-align: center">Выбор языка:</p>
-      <div
-        style="
-          display: flex;
-          width: 160px;
-          margin: 0 auto;
-          justify-content: space-between;
-        "
-      >
-        <div>
-          <a href="index.html"
-            ><img style="border-radius: 15px" width="70px" src="ru.jpg"
-          /></a>
-        </div>
-        <div>
-          <a href="eng.html"
-            ><img style="border-radius: 15px" width="70px" src="us.jpg"
-          /></a>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
