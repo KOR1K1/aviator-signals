@@ -186,6 +186,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const ballImage = document.getElementById("ball");
   const accountIdInput = document.getElementById("accountIdInput");
   const idErrorMessage = document.getElementById("idErrorMessage");
+  const currencyRadioButtons = document.getElementsByName("currency");
+  const languageDropdownBtn = document.getElementById("languageDropdownBtn");
+  const languageDropdownList = document.getElementById("languageDropdownList");
 
   let accountId = "";
   let gameAnimationId = null;
@@ -263,12 +266,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  if (languageDropdownBtn) {
+    languageDropdownBtn.style.opacity = "0";
+    languageDropdownBtn.style.pointerEvents = "none";
+    setTimeout(() => {
+      languageDropdownBtn.classList.add("visible");
+      languageDropdownBtn.style.opacity = "1";
+      languageDropdownBtn.style.pointerEvents = "auto";
+    }, preloaderDuration + 200);
+  }
+
   function updateConfirmButtonState() {
     if (!accountIdInput || !confirmButton || !idErrorMessage) return;
     const idValue = accountIdInput.value.trim();
     const onlyFigures = /^\d+$/;
     let isValid = true;
-    const genericErrorMessage = "Enter the correct amount";
+    const genericErrorMessage = "Enter the correct amount from 10 to 100000";
     if (idValue === "") {
       confirmButton.disabled = true;
       idErrorMessage.style.display = "none";
@@ -277,6 +290,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (!onlyFigures.test(idValue) || idValue.length < 1 || idValue.length > 9)
       isValid = false;
+    const numValue = parseInt(idValue, 10);
+    if (isNaN(numValue) || numValue < 10 || numValue > 100000) isValid = false;
     if (isValid) {
       confirmButton.disabled = false;
       idErrorMessage.style.display = "none";
@@ -288,8 +303,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (accountIdInput)
+  if (accountIdInput) {
+    accountIdInput.setAttribute("min", "10");
+    accountIdInput.setAttribute("max", "100000");
+    accountIdInput.setAttribute("inputmode", "numeric");
+    accountIdInput.setAttribute("pattern", "\\d*");
     accountIdInput.addEventListener("input", updateConfirmButtonState);
+  }
 
   if (confirmButton) {
     confirmButton.addEventListener("click", async () => {
@@ -605,8 +625,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Language dropdown logic
-  const languageDropdownBtn = document.getElementById("languageDropdownBtn");
-  const languageDropdownList = document.getElementById("languageDropdownList");
   if (languageDropdownBtn && languageDropdownList) {
     languageDropdownBtn.addEventListener("click", (e) => {
       e.stopPropagation();

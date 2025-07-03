@@ -188,6 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const accountIdInput = document.getElementById("accountIdInput");
   const idErrorMessage = document.getElementById("idErrorMessage");
   const currencyRadioButtons = document.getElementsByName("currency");
+  const languageDropdownBtn = document.getElementById("languageDropdownBtn");
+  const languageDropdownList = document.getElementById("languageDropdownList");
 
   let accountId = "";
   let selectedCurrency = "RUB";
@@ -201,6 +203,38 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (rb.checked) selectedCurrency = rb.value;
     });
+  }
+
+  // Появление languageDropdownBtn строго после startButton
+  if (languageDropdownBtn) {
+    languageDropdownBtn.classList.remove("visible");
+    languageDropdownBtn.style.opacity = "0";
+    languageDropdownBtn.style.pointerEvents = "none";
+  }
+
+  // После появления startButton, показываем languageDropdownBtn
+  function showLanguageBtnAfterStart() {
+    if (languageDropdownBtn) {
+      languageDropdownBtn.classList.add("visible");
+      languageDropdownBtn.style.opacity = "1";
+      languageDropdownBtn.style.pointerEvents = "auto";
+    }
+  }
+
+  // Вставляем вызов showLanguageBtnAfterStart после появления startButton
+  if (startButtonElement) {
+    // Найти место, где добавляется .visible к startButtonElement
+    // Это делается после анимации логотипа:
+    // startButtonElement.style.display = 'block';
+    // requestAnimationFrame(() => startButtonElement.classList.add('visible'));
+    // Поэтому добавим аналогичный вызов для languageDropdownBtn
+    const origAddVisible = startButtonElement.classList.add;
+    startButtonElement.classList.add = function (...args) {
+      origAddVisible.apply(this, args);
+      if (args.includes("visible")) {
+        setTimeout(showLanguageBtnAfterStart, 10); // чуть позже, чтобы анимация совпала
+      }
+    };
   }
 
   function hideFlightAnalysis() {
@@ -281,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const idValue = accountIdInput.value.trim();
     const толькоЦифры = /^\d+$/;
     let isValid = true;
-    const genericErrorMessage = "Введите корректную сумму";
+    const genericErrorMessage = "Введите корректную сумму от 10 до 100000";
     if (idValue === "") {
       confirmButton.disabled = true;
       idErrorMessage.style.display = "none";
@@ -290,6 +324,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (!толькоЦифры.test(idValue) || idValue.length < 1 || idValue.length > 9)
       isValid = false;
+    const numValue = parseInt(idValue, 10);
+    if (isNaN(numValue) || numValue < 10 || numValue > 100000) isValid = false;
     if (isValid) {
       confirmButton.disabled = false;
       idErrorMessage.style.display = "none";
@@ -301,8 +337,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (accountIdInput)
+  if (accountIdInput) {
+    accountIdInput.setAttribute("min", "10");
+    accountIdInput.setAttribute("max", "100000");
+    accountIdInput.setAttribute("inputmode", "numeric");
+    accountIdInput.setAttribute("pattern", "\\d*");
     accountIdInput.addEventListener("input", updateConfirmButtonState);
+  }
 
   if (confirmButton) {
     confirmButton.addEventListener("click", async () => {
@@ -629,8 +670,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Language dropdown logic
-  const languageDropdownBtn = document.getElementById("languageDropdownBtn");
-  const languageDropdownList = document.getElementById("languageDropdownList");
   if (languageDropdownBtn && languageDropdownList) {
     languageDropdownBtn.addEventListener("click", (e) => {
       e.stopPropagation();
